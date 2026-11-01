@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="kk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>THERMO LAB</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg1:#d9f1ff;--bg2:#fff4dc;--card:#fff;--tx:#23364a;--mu:#5d7184;--ln:#2b4a6b;--bl:#4cb5f5;--or:#ffa63d;--gr:#5ccf7a;--pk:#ff7fa8;--sb:#f2f9ff}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root{--bg1:#16283a;--bg2:#2a2433;--card:#223245;--tx:#eef5fb;--mu:#a9bccb;--ln:#7fb4dc;--sb:#1b2a3a}}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(160deg,var(--bg1),var(--bg2));color:var(--tx);font:17px/1.45 Fredoka,"Nunito","Comic Sans MS",system-ui,sans-serif}
+header{max-width:920px;margin:auto;padding:14px 16px 4px;display:flex;align-items:center;gap:12px}header .lg{font-size:44px}h1{margin:0;font-size:30px;letter-spacing:2px;color:var(--bl);text-shadow:2px 2px 0 var(--ln)}header p{margin:0;color:var(--mu)}
+nav{display:flex;gap:8px;flex-wrap:wrap;max-width:920px;margin:8px auto;padding:0 16px}
+.btn,nav button{font:inherit;font-weight:600;color:var(--tx);background:var(--card);border:3px solid var(--ln);border-radius:16px;padding:8px 14px;cursor:pointer;box-shadow:0 4px 0 var(--ln)}
+.btn:active,nav button:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ln)}nav button.on,.btn.on{background:var(--bl);color:#fff}.btn.or{background:var(--or);color:#3b2300}.btn.gr{background:var(--gr);color:#0d3b1c}.btn.pk{background:var(--pk);color:#4a0f24}
+main{max-width:920px;margin:auto;padding:0 16px 40px}section{background:var(--card);border:3px solid var(--ln);border-radius:24px;padding:16px;box-shadow:0 6px 0 rgba(43,74,107,.3)}
+h2{margin:0 0 4px;font-size:23px}h3{margin:14px 0 6px}p{margin:6px 0}.mu{color:var(--mu)}
+canvas{width:100%;height:auto;display:block;border-radius:18px;border:3px solid var(--ln);background:#eaf7f3}
+.say{display:flex;gap:10px;align-items:center;background:#fff6c9;color:#4a3a00;border:3px solid #e0a02f;border-radius:20px;padding:10px 14px;margin:10px 0}.say i{font-style:normal;font-size:42px}.say div{flex:1}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:10px 0}.ctl label{display:flex;gap:8px;align-items:center;flex:1 1 230px;font-weight:600}.ctl input[type=range]{flex:1;accent-color:var(--or);height:28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px;margin:10px 0}
+.st{background:var(--sb);border:3px solid var(--ln);border-radius:16px;padding:6px 10px}.st span{font-size:13px;color:var(--mu);display:block}.st b{font-size:21px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:12px}.card{border:3px solid var(--ln);border-radius:20px;padding:12px;background:var(--sb);cursor:pointer;box-shadow:0 4px 0 var(--ln)}.card b{color:var(--bl);font-size:19px}.card em{font-size:34px;font-style:normal;display:block}
+.formula{font:22px Georgia,serif;text-align:center;padding:8px;background:var(--sb);border:3px dashed var(--ln);border-radius:16px;margin:8px 0}
+details{border:3px solid var(--ln);border-radius:14px;padding:8px 12px;margin:6px 0;background:var(--sb)}summary{cursor:pointer;font-weight:600}
+.eb{display:flex;height:34px;border:3px solid var(--ln);border-radius:18px;overflow:hidden;background:var(--sb);margin:6px 0}.eb div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:14px;overflow:hidden;white-space:nowrap;transition:width .2s}
+.seg{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+</style></head><body>
+<header><span class="lg">🧪</span><div><h1>THERMO LAB</h1><p>Термодинамика әлеміне виртуалды саяхат</p></div></header>
+<nav><button id="n_home" onclick="show('home')">🏠 Басты бет</button><button id="n_e1" onclick="show('e1')">🔥 1. Бірінші заң</button><button id="n_e2" onclick="show('e2')">🚂 2. Бу машинасы</button><button id="n_e3" onclick="show('e3')">🌀 3. Қайтымсыздық</button><button id="n_ref" onclick="show('ref')">📖 Анықтамалар</button></nav>
+<main>
+<section id="home"><h2>Виртуалды зертханаға қош келдің! 👋</h2>
+<div class="say"><i>🧑‍🔬</i><div>Сәлем! Мен Профессор Термомын. Мұнда газды қыздырып, бу машинасын жүргізіп, жылудың қалай таралатынын өзің тексересің. Тек қарап қана емес, өзің басқар!</div></div>
+<div class="cards"><div class="card" onclick="show('e1')"><em>🔥</em><b>1. Бірінші заң</b><br>Газды қыздыр, поршень көтерілгенін көр.</div><div class="card" onclick="show('e2')"><em>🚂</em><b>2. Бу машинасы</b><br>От жақ, будан жұмыс алып көр.</div><div class="card" onclick="show('e3')"><em>🌀</em><b>3. Қайтымсыз процестер</b><br>Газ, жылу және бояу қалай таралады?</div><div class="card" onclick="show('ref')"><em>📖</em><b>Анықтамалар</b><br>Формулалар мен ұғымдар.</div></div>
+<p style="margin-top:14px"><button class="btn gr" onclick="show('e1')">🚀 Тәжірибені бастау</button></p>
+<p class="mu">Үш заң бір тізбек: бірінші заң энергияның сақталуын, екінші заң процестің бағыты мен шегін, қайтымсыздық энтропияның өсуін көрсетеді.</p></section>
+
+<section id="e1" hidden><h2>🔥 1-тәжірибе. Термодинамиканың бірінші заңы</h2>
+<p class="mu">Жылу, ішкі энергия және жұмыс: газға берілген жылу қайда кетеді?</p>
+
+<canvas id="c1" width="640" height="360"></canvas>
+<div class="say"><i>🧑‍🔬</i><div id="say1"></div></div>
+<div class="ctl"><label>Жылу мөлшері Q <input type="range" id="q1" min="0" max="250" value="200" step="10"><b id="q1v">200 Дж</b></label><button class="btn or" id="b1">🔥 Қыздыру</button><button class="btn" id="r1">↺ Бастапқы мәндер</button></div>
+<div class="eb"><div id="ebU" style="background:#ff8a3d;width:0">ΔU</div><div id="ebA" style="background:#3bbf6a;width:0">A</div></div><p class="mu" style="margin:0">Жылу Q-дің бөлінуі: 🟠 газды қыздыру (ΔU), 🟢 поршеньді көтеру (A)</p>
+<div class="grid"><div class="st"><span>Берілген жылу Q</span><b id="o1q">0 Дж</b></div><div class="st"><span>Жұмыс A</span><b id="o1a">0 Дж</b></div><div class="st"><span>Ішкі энергия ΔU</span><b id="o1u">0 Дж</b></div><div class="st"><span>Температура T</span><b id="o1t">300 К</b></div><div class="st"><span>Қысым p</span><b id="o1p">1.00 атм</b></div></div>
+<div class="formula">Q = ΔU + A</div>
+<h3>🤔 Ойлан</h3>
+<details><summary>Газды қыздырғанда температурасы қалай өзгерді?</summary>Ішкі энергия артқанда температура көтеріледі. Бөлшектер жылдамырақ қозғалады.</details>
+<details><summary>Поршень неліктен жоғары көтерілді?</summary>Газ ұлғайып, жүкті көтеріп жұмыс жасады: A = p·ΔV.</details>
+<details><summary>Берілген жылудың бәрі ішкі энергияны арттыра ма?</summary>Жоқ. Бір бөлігі жұмысқа кетеді, қалғаны газды қыздырады.</details></section>
+
+<section id="e2" hidden><h2>🚂 2-тәжірибе. Бу машинасы және екінші заң</h2>
+<p class="mu">Ыстық көз (қазандық) → жұмыс денесі (бу) → суық көз (конденсатор).</p>
+<canvas id="c2" width="640" height="360"></canvas>
+<div class="say"><i>🧑‍🔬</i><div id="say2"></div></div>
+<div class="ctl"><button class="btn or" id="fire">🔥 От жағу</button><label>Жалын қуаты <input type="range" id="pw" min="1" max="10" value="5"></label><button class="btn pk" id="cool">❄️ Салқындатқыш: қосулы</button><button class="btn" id="r2">↺ Қайта бастау</button></div>
+<div class="eb"><div id="ebA2" style="background:#3bbf6a;width:0">A</div><div id="ebQ2" style="background:#3a9ee8;width:0">Q₂</div></div><p class="mu" style="margin:0">Қыздырғыштан алынған Q₁: 🟢 пайдалы жұмыс (A), 🔵 суыққа кеткен жылу (Q₂)</p>
+<div class="grid"><div class="st"><span>Қазандық</span><b id="o2t">20 °C</b></div><div class="st"><span>Бу қысымы</span><b id="o2p">0.0</b></div><div class="st"><span>Қарсы қысым</span><b id="o2b">0.0</b></div><div class="st"><span>Маховик</span><b id="o2s">0 айн/мин</b></div><div class="st"><span>Q₁</span><b id="o2q1">0 Дж</b></div><div class="st"><span>A</span><b id="o2a">0 Дж</b></div><div class="st"><span>Q₂</span><b id="o2q2">0 Дж</b></div><div class="st"><span>ПӘК η</span><b id="o2e">0 %</b></div></div>
+<div class="formula">A = Q₁ − Q₂ &nbsp; η = (Q₁ − Q₂)/Q₁ · 100%</div>
+<details><summary>🤔 Неліктен бу машинасына тек қыздыру жеткіліксіз?</summary>Машина циклмен жұмыс істейді: бу қайтадан суып, конденсацияланып, бастапқы күйге оралуы керек. Ол үшін жылудың бір бөлігі суық көзге берілуі тиіс. Сондықтан жылуды толық жұмысқа айналдыру мүмкін емес: η &lt; 100%. Салқындатқышты өшіріп көр!</details></section>
+
+<section id="e3" hidden><h2>🌀 3-тәжірибе. Қайтымсыз процестер</h2>
+<p class="mu">Кейбір процестер өздігінен кері бағытта жүрмейді.</p>
+<div class="seg" id="seg3"><button class="btn on" data-m="g">💨 Газдың ұлғаюы</button><button class="btn" data-m="h">🌡️ Жылудың таралуы</button><button class="btn" data-m="d">💧 Диффузия</button></div>
+<canvas id="c3" width="640" height="360"></canvas>
+<div class="say"><i>🧑‍🔬</i><div id="say3"></div></div>
+<div class="ctl"><button class="btn or" id="go3">Бөгетті алып тастау</button><button class="btn pk" id="rev3">⏪ Кері қайтару</button><button class="btn" id="r3">↺ Қайта бастау</button></div>
+<div id="ent"><span class="mu">Энтропия (қатысты шама): </span><b id="o3s">0.00</b><div class="eb" style="height:20px"><div id="sb" style="background:#a46bff;width:0"></div></div></div>
+<div class="formula">ΔS ≥ 0</div>
+<p class="mu">Қайтымсыз процестің мысалдары: жылудың ыстықтан суыққа берілуі, газдың бос кеңістікке ұлғаюы, бояудың таралуы, үйкелістен механикалық энергияның жылуға айналуы.</p></section>
+
+<section id="ref" hidden><h2>📖 Анықтамалар</h2>
+<h3>Бірінші заң</h3><div class="formula">Q = ΔU + A</div><p>Q — берілген жылу, ΔU — ішкі энергия өзгерісі, A — газдың жұмысы.</p>
+<h3>Газдың жұмысы (p = const)</h3><div class="formula">A = pΔV</div>
+<h3>Жылу қозғалтқышы</h3><div class="formula">A = Q₁ − Q₂ &nbsp; η = (Q₁ − Q₂)/Q₁ · 100%</div><p>Q₁ — қыздырғыштан алынған, Q₂ — салқындатқышқа берілген жылу.</p>
+<h3>Екінші заң</h3><div class="formula">ΔS ≥ 0</div><p>Оқшауланған жүйенің энтропиясы кемімейді. Жылу өздігінен ыстықтан суыққа беріледі.</p></section>
+</main>
+<script>
+const $=id=>document.getElementById(id),tabs=['home','e1','e2','e3','ref'],R=Math.random,lerp=(a,b,t)=>a+(b-a)*t;let cur='home';
+function show(t){cur=t;tabs.forEach(x=>{$(x).hidden=x!==t;$('n_'+x).classList.toggle('on',x===t)});scrollTo(0,0)}show('home');
+function seg(id,fn){const s=$(id);s.onclick=e=>{const b=e.target.closest('button');if(!b)return;[...s.children].forEach(x=>x.classList.toggle('on',x===b));fn(b.dataset.m)}}
+const FN='Fredoka,system-ui,sans-serif';
+function grad(g,x0,y0,x1,y1,c){const k=g.createLinearGradient(x0,y0,x1,y1);c.forEach((v,i)=>k.addColorStop(i/(c.length-1),v));return k}
+function rr(g,x,y,w,h,r,f,s,lw){g.beginPath();g.roundRect(x,y,w,h,r);if(f){g.fillStyle=f;g.fill()}if(s){g.strokeStyle=s;g.lineWidth=lw||3;g.stroke()}}
+function txt(g,t,x,y,c,sz,al){g.fillStyle=c||'#23364a';g.font='600 '+(sz||14)+'px '+FN;g.textAlign=al||'left';g.fillText(t,x,y)}
+function bg(g){g.fillStyle=grad(g,0,0,0,325,['#d9f1ff','#f0fbf5']);g.fillRect(0,0,640,360);g.fillStyle=grad(g,0,325,0,360,['#d09a60','#9a6434']);g.fillRect(0,325,640,35);g.fillStyle='#7a4a22';g.fillRect(0,325,640,4)}
+function lab(g,t,x,y,bx,by){g.strokeStyle='#e0902f';g.lineWidth=2;g.beginPath();g.moveTo(x,y);g.lineTo(bx,by);g.stroke();g.fillStyle='#e0902f';g.beginPath();g.arc(x,y,4,0,7);g.fill();g.font='600 13px '+FN;const w=g.measureText(t).width+18;rr(g,bx-w/2,by-12,w,24,12,'#fff3c4','#e0902f',2);txt(g,t,bx,by+5,'#5a3b00',13,'center')}
+function gauge(g,cx,cy,r,v,mx,unit){g.fillStyle=grad(g,cx-r,cy-r,cx+r,cy+r,['#fafafa','#8d99a3','#eef3f6']);g.beginPath();g.arc(cx,cy,r+7,0,7);g.fill();g.strokeStyle='#5d6b75';g.lineWidth=2;g.stroke();g.fillStyle='#fff';g.beginPath();g.arc(cx,cy,r,0,7);g.fill();
+for(let i=0;i<=10;i++){const a=2.2+5*i/10,c=Math.cos(a),s=Math.sin(a);g.strokeStyle=i>=8?'#e04b3a':'#334';g.lineWidth=i%2?1.2:2.5;g.beginPath();g.moveTo(cx+c*(r-8),cy+s*(r-8));g.lineTo(cx+c*(r-1),cy+s*(r-1));g.stroke();if(i%2==0)txt(g,+(mx*i/10).toFixed(1),cx+c*(r-19),cy+s*(r-19)+4,'#223',10,'center')}
+const a=2.2+5*Math.min(1,v/mx);g.strokeStyle='#d33';g.lineWidth=3;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a)*(r-10),cy+Math.sin(a)*(r-10));g.stroke();g.fillStyle='#333';g.beginPath();g.arc(cx,cy,4,0,7);g.fill();txt(g,unit,cx,cy+r*.55,'#556',11,'center')}
+function thermo(g,x,y,h,f){rr(g,x-9,y,18,h,9,'rgba(255,255,255,.85)','#7b8d99',2);for(let i=0;i<=10;i++){const yy=y+10+i*(h-20)/10;g.strokeStyle='#7b8d99';g.lineWidth=1;g.beginPath();g.moveTo(x+9,yy);g.lineTo(x+(i%5?15:21),yy);g.stroke()}
+g.fillStyle='#e04b3a';g.fillRect(x-4,y+h-10-(h-20)*f,8,(h-20)*f+10);g.beginPath();g.arc(x,y+h+8,13,0,7);g.fill();g.fillStyle='rgba(255,255,255,.6)';g.beginPath();g.arc(x-4,y+h+4,4,0,7);g.fill()}
+function lamp(g,x,y,on,p){rr(g,x-30,y-34,60,34,15,grad(g,x-30,0,x+30,0,['#bfe0ee','#fff','#9cc9de']),'#4a7e99');g.fillStyle='rgba(255,205,100,.75)';g.fillRect(x-26,y-18,52,14);rr(g,x-10,y-44,20,10,3,'#8a8f94');g.fillStyle='#e9d9a8';g.fillRect(x-2,y-52,4,9);
+if(on){const h=24+R()*8+(p||0);g.fillStyle=grad(g,0,y-52,0,y-52-h,['#ffe45c','#ff7a1a']);g.beginPath();g.moveTo(x-9,y-50);g.quadraticCurveTo(x-13,y-52-h*.6,x,y-52-h);g.quadraticCurveTo(x+13,y-52-h*.6,x+9,y-50);g.fill()}}
+const steel=g=>grad(g,0,0,0,40,['#e8eef2','#8b98a3','#cfd8de']);
+function ball(g,x,y,r,c){g.fillStyle=c;g.beginPath();g.arc(x,y,r,0,7);g.fill();g.fillStyle='rgba(255,255,255,.7)';g.beginPath();g.arc(x-r*.35,y-r*.35,r*.35,0,7);g.fill()}
+function bar2(a,b,fa,fb,ta,tb){const s=fa+fb;$(a).style.width=s>0?fa/s*100+'%':0;$(b).style.width=s>0?fb/s*100+'%':0;$(a).textContent=fa/s>.12?ta:'';$(b).textContent=fb/s>.12?tb:''}
+
+/* ---- 1 ---- */
+const g1=$('c1').getContext('2d'),H0=90;let m1='p',Qg=0,heat=false,P1=[];
+function init1(){P1=[];for(let i=0;i<36;i++)P1.push({x:255+R()*170,y:170+R()*70,vx:R()*2-1,vy:R()*2-1})}init1();
+function calc1(){const Q=Qg;let A,dU;if(m1=='p'){A=.4*Q;dU=.6*Q}else if(m1=='v'){A=0;dU=Q}else{A=Q;dU=0}const T=300+dU*.8,dh=A*.4;return{Q,A,dU,T,dh,p:T/300/((H0+dh)/H0)}}
+$('q1').oninput=e=>{$('q1v').textContent=e.target.value+' Дж';if(Qg>+e.target.value)Qg=+e.target.value};
+$('b1').onclick=()=>{heat=+$('q1').value>Qg};$('r1').onclick=()=>{Qg=0;heat=false;init1()};
+function loop1(dt){const tg=+$('q1').value;if(heat){Qg+=70*dt;if(Qg>=tg){Qg=tg;heat=false}}$('b1').textContent=heat?'🔥 Қызуда…':'🔥 Қыздыру';
+const S=calc1(),top=250-(H0+S.dh),sp=Math.sqrt(S.T/300)*70,k=Math.min(1,(S.T-300)/200),g=g1;
+P1.forEach(p=>{p.x+=p.vx*sp*dt;p.y+=p.vy*sp*dt;if(p.x<252){p.x=252;p.vx=Math.abs(p.vx)}if(p.x>428){p.x=428;p.vx=-Math.abs(p.vx)}if(p.y<top+8){p.y=top+8;p.vy=Math.abs(p.vy)}if(p.y>242){p.y=242;p.vy=-Math.abs(p.vy)}});
+bg(g);lamp(g,340,325,heat,S.Q/20);thermo(g,50,60,200,Math.min(1,(S.T-280)/200));
+g.fillStyle=`rgba(255,${Math.round(lerp(200,110,k))},90,${.12+.25*k})`;g.fillRect(244,top,192,250-top);
+P1.forEach(p=>ball(g,p.x,p.y,6,`rgb(${Math.round(lerp(60,235,k))},${Math.round(lerp(140,80,k))},${Math.round(lerp(220,50,k))})`));
+g.fillStyle='rgba(200,235,255,.25)';g.fillRect(244,20,192,top-20);g.strokeStyle='#5aa6d0';g.lineWidth=7;g.beginPath();g.moveTo(241,16);g.lineTo(241,252);g.moveTo(439,16);g.lineTo(439,252);g.stroke();g.fillStyle='rgba(255,255,255,.6)';g.fillRect(249,24,5,200);
+for(let i=0;i<=11;i++){g.strokeStyle='#3d7ea6';g.lineWidth=i%5?1:2;g.beginPath();g.moveTo(443,250-i*20);g.lineTo(i%5?450:458,250-i*20);g.stroke()}
+rr(g,234,250,212,14,4,steel(g),'#56646f',2);
+
+rr(g,244,top-14,192,14,3,grad(g,0,top-14,0,top,['#dfe6eb','#7f8c97']),'#56646f',2);g.fillStyle='#56646f';g.fillRect(244,top-9,192,2);
+rr(g,306,top-40,68,26,5,grad(g,0,top-40,0,top-14,['#7b8791','#46505a']),'#2b333a',2);txt(g,'жүк',340,top-22,'#fff',13,'center');
+gauge(g,552,230,46,S.p,2,'атм');
+lab(g,'Термометр',50,70,50,34);lab(g,'Жүк',306,top-27,140,top-27);lab(g,'Поршень',436,top-7,540,top-7);lab(g,'Газ',262,(top+250)/2,140,(top+250)/2+25);lab(g,'Спирттік шам',312,305,130,305);lab(g,'Манометр',552,284,552,306);
+const T=S.Q;$('o1q').textContent=S.Q.toFixed(0)+' Дж';$('o1a').textContent=S.A.toFixed(0)+' Дж';$('o1u').textContent=S.dU.toFixed(0)+' Дж';$('o1t').textContent=Math.round(S.T)+' К';$('o1p').textContent=S.p.toFixed(2)+' атм';bar2('ebU','ebA',S.dU,S.A,'ΔU','A');
+$('say1').textContent=S.Q==0?'Q сырғытпасын таңдап, «Қыздыру» батырмасын бас. Қазір газ бөлшектері баяу қозғалып тұр.':`Газға ${S.Q.toFixed(0)} Дж жылу берілді. Оның ${S.A.toFixed(0)} Дж-ы поршеньді көтеріп жұмыс жасады, ${S.dU.toFixed(0)} Дж-ы газды қыздырды: бөлшектер жылдамдады.`}
+
+/* ---- 2 ---- */
+const g2=$('c2').getContext('2d');let fire=false,cool=true,Tb=20,pb=.5,ang=0,Q1=0,A2=0,tt=0;
+function reset2(){fire=false;Tb=20;pb=.5;ang=0;Q1=0;A2=0;$('fire').textContent='🔥 От жағу'}
+$('fire').onclick=()=>{fire=!fire;$('fire').textContent=fire?'🧯 Өшіру':'🔥 От жағу'};$('cool').onclick=()=>{cool=!cool;$('cool').textContent='❄️ Салқындатқыш: '+(cool?'қосулы':'өшірулі')};$('r2').onclick=reset2;
+function loop2(dt){tt+=dt;const pw=+$('pw').value,tg=fire?100+pw*15:20;Tb+=(tg-Tb)*(fire?.5:.08)*dt;const pin=Tb<100?0:(Tb-100)/10,sp=Math.max(0,pin-pb)*.35;
+if(cool)pb+=(.5-pb)*2*dt;else pb=Math.min(pin,pb+3.6*sp*dt);if(fire&&Tb>=100)Q1+=pw*20*dt;A2+=sp*(pin-pb)*3*dt;if(A2>Q1)A2=Q1;ang+=sp*6.28*dt;
+const g=g2;bg(g);
+rr(g,45,300,90,26,4,'#2e2e2e');if(fire)for(let i=0;i<5;i++){g.fillStyle=i%2?'#ffd34a':'#ff8a2a';g.beginPath();g.moveTo(52+i*17,326);g.lineTo(60+i*17,303-pw*1.5-R()*8);g.lineTo(69+i*17,326);g.fill()}
+rr(g,70,105,30,48,4,'#6e7880');if(fire)for(let i=0;i<4;i++){g.fillStyle=`rgba(120,120,120,${.5-i*.1})`;g.beginPath();g.arc(85+Math.sin(tt*2+i)*8,95-((tt*30+i*20)%70),9+i*2,0,7);g.fill()}
+rr(g,30,150,120,152,16,grad(g,30,0,150,0,['#a24e1c','#f2a762','#b8602a']),'#6b3414');for(let i=0;i<5;i++)for(const y of[160,290]){g.fillStyle='#7a3c12';g.beginPath();g.arc(42+i*24,y,3.5,0,7);g.fill()}
+rr(g,156,190,10,100,4,'#fff','#555',2);g.fillStyle='rgba(60,150,230,.8)';g.fillRect(158,225,6,63);txt(g,'Су',90,240,'#fff',15,'center');txt(g,Tb.toFixed(0)+' °C',90,262,'#fff',15,'center');
+g.strokeStyle='#8a98a3';g.lineWidth=12;g.beginPath();g.moveTo(150,215);g.lineTo(232,215);g.moveTo(200,140);g.lineTo(200,215);g.stroke();g.strokeStyle='#d5dee4';g.lineWidth=3;g.beginPath();g.moveTo(150,212);g.lineTo(232,212);g.stroke();
+gauge(g,200,100,38,pin,15,'бар');
+const pinx=540-34*Math.cos(ang),piny=215+34*Math.sin(ang),pr=pinx-130;
+rr(g,230,183,220,64,8,grad(g,0,183,0,247,['#e8eef2','#8b98a3','#cfd8de']),'#56646f');rr(g,236,191,208,48,3,'#e8f2f8');g.fillStyle=`rgba(255,255,255,${Math.min(1,pin/6)})`;g.fillRect(238,193,Math.max(0,pr-16-238),44);g.strokeStyle=`rgba(150,200,235,${Math.min(1,pin/6)})`;g.lineWidth=1;for(let i=0;i<6;i++){g.beginPath();g.arc(250+i*(Math.max(0,pr-262)/6),215+Math.sin(tt*5+i)*8,5,0,7);g.stroke()}
+rr(g,pr-14,191,14,48,2,'#56646f','#2b333a',2);g.strokeStyle='#6b7882';g.lineWidth=6;g.beginPath();g.moveTo(pr,215);g.lineTo(pinx,piny);g.stroke();
+const th=Math.PI-ang;g.strokeStyle='#4a6070';g.lineWidth=8;g.beginPath();g.arc(540,215,60,0,7);g.stroke();g.fillStyle='rgba(150,170,185,.35)';g.fill();for(let i=0;i<6;i++){g.lineWidth=6;g.beginPath();g.moveTo(540,215);g.lineTo(540+60*Math.cos(th+i*1.047),215+60*Math.sin(th+i*1.047));g.stroke()}
+ball(g,540,215,11,'#6b7882');ball(g,pinx,piny,6,'#e04b3a');
+g.strokeStyle='#8a98a3';g.lineWidth=8;g.beginPath();g.moveTo(340,247);g.lineTo(340,280);g.stroke();
+rr(g,260,280,160,44,8,cool?'rgba(80,170,240,.55)':'rgba(160,170,180,.4)','#3d6f92');g.strokeStyle=cool?'#1e6fb0':'#888';g.lineWidth=3;g.beginPath();g.moveTo(272,296);for(let i=0;i<7;i++)g.lineTo(272+i*21,i%2?296:312);g.stroke();
+if(cool)for(let i=0;i<3;i++){g.fillStyle='#7cc4ff';g.beginPath();g.arc(300+i*40,288+((tt*40+i*13)%24),3,0,7);g.fill()}
+if(pin>0.5)for(let i=0;i<4;i++){g.fillStyle='rgba(255,255,255,.9)';g.strokeStyle='#b8c6d0';g.lineWidth=1;g.beginPath();g.arc(160+((tt*50+i*18)%65),215,5,0,7);g.fill();g.stroke()}
+lab(g,'Қазандық: ыстық көз',90,305,100,345);lab(g,'Бу құбыры',190,221,190,265);lab(g,'Манометр',238,92,285,66);lab(g,'Цилиндр және поршень',340,183,340,156);lab(g,'Маховик',540,155,540,125);lab(g,'Конденсатор: суық көз',420,305,520,305);
+const Q2=Math.max(0,Q1-A2),eta=Q1>0?A2/Q1*100:0;$('o2t').textContent=Tb.toFixed(0)+' °C';$('o2p').textContent=pin.toFixed(1);$('o2b').textContent=pb.toFixed(1);$('o2s').textContent=Math.round(sp*60)+' айн/мин';$('o2q1').textContent=Q1.toFixed(0)+' Дж';$('o2a').textContent=A2.toFixed(0)+' Дж';$('o2q2').textContent=Q2.toFixed(0)+' Дж';$('o2e').textContent=eta.toFixed(0)+' %';bar2('ebA2','ebQ2',A2,Q2,'A','Q₂');
+$('say2').textContent=!fire&&Q1==0?'«От жағу» батырмасын бас. Су қайнап, бу пайда болады.':pin<=0?'Су қызып жатыр. Бу әлі жоқ: 100 °C-қа жету керек.':sp<.05&&!cool?'Салқындатқыш өшірулі: бу суымай, поршеньнің артындағы қарсы қысым өсті. Машина тоқтады. Салқындатқышты қос!':sp<.05?'Бу қысымы әлі жеткіліксіз. Жалын қуатын арттыр.':`Бу поршеньді итеріп, маховикті айналдырады. Жылудың бір бөлігі жұмысқа (A), қалғаны салқындатқышқа (Q₂) кетеді: ПӘК ${eta.toFixed(0)}% ғана.`}
+
+/* ---- 3 ---- */
+const g3=$('c3').getContext('2d');let m3='g',P3=[],bar=true,Th=90,Tc=20,contact=false,rev='',N=60;
+const SAY={g:['Бөгет екі бөлікті бөліп тұр: сол жақта газ, оң жақ бос. «Бөгетті алып тастау» батырмасын бас.','Газ бүкіл ыдысқа тарады. Бөлшектердің бәрі өздігінен бір жаққа қайта жиналмайды.'],h:['Ыстық мыс дене мен суық дене бөлек тұр. «Жанастыру» батырмасын бас.','Жылу ыстықтан суыққа берілді, температуралар теңесті. Кері бағытта өздігінен жүрмейді.'],d:['Стақандағы таза су. Бояу тамызып көр.','Бояу молекулалары суға біртіндеп таралды. Олар өздігінен қайта жиналмайды.']};
+function init3(){P3=[];bar=true;contact=false;Th=90;Tc=20;rev='';for(let i=0;i<N;i++){const a=R()*6.28;P3.push(m3=='d'?{x:320,y:100,vx:0,vy:0}:{x:70+R()*240,y:60+R()*230,vx:Math.cos(a),vy:Math.sin(a)})}
+$('go3').textContent={g:'Бөгетті алып тастау',h:'Денелерді жанастыру',d:'Бояу тамызу'}[m3];$('ent').style.display=m3=='h'?'none':'block'}init3();
+seg('seg3',m=>{m3=m;init3()});$('r3').onclick=init3;$('go3').onclick=()=>{if(m3=='g')bar=false;else{contact=true;if(m3=='d')P3.forEach(p=>{p.x=320+R()*14-7;p.y=100+R()*14})}rev=''};
+$('rev3').onclick=()=>{rev={g:`Өздігінен қайтпайды! Барлық ${N} бөлшектің бір жартыда болу ықтималдығы шамамен 10⁻¹⁸. Іс жүзінде мүмкін емес.`,h:'Денелер өздігінен қайта қызып-суымайды. Кері бағытқа жылуды сырттан жұмыс жұмсап қана беруге болады.',d:'Бояу молекулалары өздігінен бір жерге жиналмайды. Араласу қайтымсыз.'}[m3]};
+function loop3(dt){const g=g3;bg(g);let S=0;
+if(m3=='h'){if(contact){const d=.25*(Th-Tc)*dt;Th-=d;Tc+=d}const col=T=>{const k=Math.max(0,Math.min(1,(T-20)/70));return `rgb(${Math.round(lerp(150,235,k))},${Math.round(lerp(190,110,k))},${Math.round(lerp(220,60,k))})`};const gp=contact?0:44;
+rr(g,130-gp/2,130,150,110,10,grad(g,0,130,0,240,[col(Th),'#c96a2a']),'#6b3414');rr(g,360+gp/2,130,150,110,10,grad(g,0,130,0,240,[col(Tc),'#6e8ba0']),'#456');
+txt(g,'Мыс',205-gp/2,190,'#fff',18,'center');txt(g,'Алюминий',435+gp/2,190,'#fff',18,'center');
+thermo(g,70-gp/2,60,150,Math.max(0,(Th-10)/90));thermo(g,570+gp/2,60,150,Math.max(0,(Tc-10)/90));txt(g,Th.toFixed(1)+' °C',70-gp/2,260,null,16,'center');txt(g,Tc.toFixed(1)+' °C',570+gp/2,260,null,16,'center');
+if(contact){g.fillStyle='#e04b3a';g.font='28px '+FN;g.textAlign='center';g.fillText('Q →',320,125)}lab(g,'Ыстық дене',200,130,200,100);lab(g,'Суық дене',440,130,440,100)}
+else{g.fillStyle=m3=='d'?'rgba(120,190,235,.45)':'rgba(200,235,255,.3)';g.fillRect(62,52,516,248);g.strokeStyle='#5aa6d0';g.lineWidth=6;g.strokeRect(60,50,520,252);g.fillStyle='rgba(255,255,255,.55)';g.fillRect(68,58,5,220);for(let i=0;i<6;i++){g.strokeStyle='#3d7ea6';g.lineWidth=1.5;g.beginPath();g.moveTo(580,300-i*45);g.lineTo(i%2?590:598,300-i*45);g.stroke()}
+if(m3=='g'){P3.forEach(p=>{p.x+=p.vx*90*dt;p.y+=p.vy*90*dt;const xr=bar?314:572;if(p.x<68){p.x=68;p.vx=Math.abs(p.vx)}if(p.x>xr){p.x=xr;p.vx=-Math.abs(p.vx)}if(p.y<58){p.y=58;p.vy=Math.abs(p.vy)}if(p.y>294){p.y=294;p.vy=-Math.abs(p.vy)}});
+if(bar){rr(g,316,40,8,262,2,steel(g),'#56646f',2);rr(g,308,26,24,14,4,'#e04b3a');txt(g,'бос кеңістік',450,180,'#5d7184',17,'center');lab(g,'Бөгет',320,120,420,80)}
+const f=P3.filter(p=>p.x<320).length/N;S=f<=0||f>=1?0:-(f*Math.log(f)+(1-f)*Math.log(1-f))/Math.LN2;P3.forEach(p=>ball(g,p.x,p.y,5,'#1e88c9'))}
+else{P3.forEach(p=>{if(contact){p.x+=(R()-.5)*160*dt;p.y+=(R()-.5)*160*dt}p.x=Math.max(68,Math.min(572,p.x));p.y=Math.max(58,Math.min(294,p.y))});
+const bx=P3.reduce((s,p)=>s+p.x,0)/N,by=P3.reduce((s,p)=>s+p.y,0)/N,v=P3.reduce((s,p)=>s+(p.x-bx)**2+(p.y-by)**2,0)/N;S=Math.min(1,Math.log(1+v/40)/Math.log(1+(173*173+70*70)/40));
+rr(g,312,8,16,40,8,'rgba(255,255,255,.7)','#789',2);rr(g,306,0,28,18,8,contact?'#c8788c':'#e04b3a');if(!contact||S<.05)ball(g,320,58,4,'#c8288c');P3.forEach(p=>{g.fillStyle='rgba(200,40,140,.7)';g.beginPath();g.arc(p.x,p.y,4,0,7);g.fill()});lab(g,'Тамшуыр',334,28,430,24);lab(g,'Су',100,250,110,320)}}
+$('o3s').textContent=S.toFixed(2);$('sb').style.width=S*100+'%';$('say3').textContent=rev||SAY[m3][(m3=='g'?!bar:contact)&&(m3=='h'?Th-Tc<30:S>.6)?1:0]}
+
+let last=0;function loop(ts){const dt=Math.min(.05,(ts-last)/1000||0);last=ts;if(cur=='e1')loop1(dt);else if(cur=='e2')loop2(dt);else if(cur=='e3')loop3(dt);requestAnimationFrame(loop)}requestAnimationFrame(loop);
+</script></body></html>
